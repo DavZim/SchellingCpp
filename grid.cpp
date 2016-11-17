@@ -314,6 +314,6 @@ void Grid::simulate(unsigned int nMax, int plotAfter, int sleep) {
     }
 
     std::cout << "\033[2J\033[1;1H";
-    std::cout << "------ Grid after " << nSim << " Iterations, with " << moves << " moves. -------------------\n";
+    std::cout << "------ Grid after " << nSim - 1 << " Iterations, with " << moves << " moves. -------------------\n";
     drawPlot();
 }
