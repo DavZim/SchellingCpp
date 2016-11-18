@@ -22,7 +22,6 @@ public:
 
 private:
     int seed;
-    std::mt19937 gen;
     std::mt19937 re {};
     using distUnifInt = std::uniform_int_distribution<int>;
     using distUnifDbl = std::uniform_real_distribution<double>;

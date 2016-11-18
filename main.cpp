@@ -7,7 +7,7 @@ static void show_usage()
               << "  -s,--seed\t\tSet seed, defaults to current time\n"
               << "  -g,--gridSize\t\tSpecify the length of a simulation grid, defaults to 10 (i.e., 10x10)\n"
               << "  -p,--percEmpty\tSpecify the percentage of empty grids, defaults to 0.2\n"
-              << "  -t,--threshold\tSpecify the threshold above which agents are happy, defaults to 0.5\n"
+              << "  -t,--threhhold\tSpecify the threshold above which agents are happy, defaults to 0.5\n"
               << "  -n,--nRaces\t\tSpecify the number of races [2,26], defaults to 3\n"
               << "  -m,--maxIter\t\tSpecify the maximum number of iterations, defaults to 10,000\n"
               << "  -pi,--plotInterval\tSpecify the intervals in which the plots should be updated, defaults to 100\n"

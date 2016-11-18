@@ -9,7 +9,6 @@ RNG::RNG(int seed) {
 }
 void RNG::setseed(int newSeed){
     seed = newSeed;
-    gen.seed(seed);
     re.seed(seed);
 }
 void RNG::printseed() {

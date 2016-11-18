@@ -12,91 +12,91 @@ Grid::~Grid() {
 
 void Grid::initiate(unsigned int gridSize){
     this->gridSize = gridSize;
-	std::cout << "Creating a grid of size " << gridSize << "x" << gridSize << "\n";
+    std::cout << "Creating a grid of size " << gridSize << "x" << gridSize << "\n";
 
-	// 1. create the grid
-	GridEl* lastEl;
-	GridEl* el;
-	GridEl* upperEl = nullptr;
-	unsigned int row = 0, col = 0;
+    // 1. create the grid
+    GridEl* lastEl;
+    GridEl* el;
+    GridEl* upperEl = nullptr;
+    unsigned int row = 0, col = 0;
 
-	// first iteration
-	el = new GridEl(row, col, 0, nullptr, nullptr, nullptr, nullptr);
-	head = el;
-	lastEl = el;
-	++col;
+    // first iteration
+    el = new GridEl(row, col, 0, nullptr, nullptr, nullptr, nullptr);
+    head = el;
+    lastEl = el;
+    ++col;
 
-	while (col < gridSize) {
-		// iterate left to right and link vertically
-		el = new GridEl(row, col, 0, nullptr, nullptr, nullptr, nullptr);
-		el->W = lastEl;
-		lastEl->E = el;
-		lastEl = el;
-		++col;
-	}
-	upperEl = lastEl;
-	++row;
-
+    while (col < gridSize) {
+        // iterate left to right and link vertically
+        el = new GridEl(row, col, 0, nullptr, nullptr, nullptr, nullptr);
+        el->W = lastEl;
+        lastEl->E = el;
+        lastEl = el;
+        ++col;
+    }
+    upperEl = lastEl;
+    ++row;
+    
     // loop the body
-	while(row < gridSize) {
-		col = 0;
-		if (row % 2 != 0) {
+    while(row < gridSize) {
+        col = 0;
+        if (row % 2 != 0) {
             el = new GridEl(row, gridSize - col - 1, 0, nullptr, nullptr, nullptr, nullptr);
 
             // even row (starts at 0...), iterate right to left
-			el->E = nullptr; // right is nothing
-			el->N = upperEl;
+            el->E = nullptr; // right is nothing
+            el->N = upperEl;
             upperEl->S = el;
-			lastEl = el;
-			upperEl = upperEl->W; // move to the left
+            lastEl = el;
+            upperEl = upperEl->W; // move to the left
             ++col;
 
-			while (col < gridSize) {
-				el = new GridEl(row, gridSize - col - 1, 0, nullptr, nullptr, nullptr, nullptr);
-				el->E = lastEl;
-				lastEl->W = el;
-				el->N = upperEl;
-				upperEl->S = el;
-				upperEl = upperEl->W;
+            while (col < gridSize) {
+                el = new GridEl(row, gridSize - col - 1, 0, nullptr, nullptr, nullptr, nullptr);
+                el->E = lastEl;
+                lastEl->W = el;
+                el->N = upperEl;
+                upperEl->S = el;
+                upperEl = upperEl->W;
                 lastEl = el;
-				++col;
-			}
-		} else {
+                ++col;
+            }
+        } else {
             el = new GridEl(row, col, 0, nullptr, nullptr, nullptr, nullptr);
 
             // uneven rows (starts at 0...), iterate left to right
-			el->W = nullptr; // left is nothing
-			el->N = upperEl;
+            el->W = nullptr; // left is nothing
+            el->N = upperEl;
             upperEl->S = el;
-			lastEl = el;
-			upperEl = upperEl->E;
+            lastEl = el;
+            upperEl = upperEl->E;
             col++;
 
-			while (col < gridSize) {
-				el = new GridEl(row, col, 0, nullptr, nullptr, nullptr, nullptr);
-				el->W = lastEl;
-				lastEl->E = el;
-				el->N = upperEl;
-				upperEl->S = el;
-				upperEl = upperEl->E;
+            while (col < gridSize) {
+                el = new GridEl(row, col, 0, nullptr, nullptr, nullptr, nullptr);
+                el->W = lastEl;
+                lastEl->E = el;
+                el->N = upperEl;
+                upperEl->S = el;
+                upperEl = upperEl->E;
                 lastEl = el;
-				++col;
-			}
-		}
-		++row;
+                ++col;
+            }
+        }
+        ++row;
         upperEl = el;
-	}
+    }
 }
 
 void Grid::countElements(){
-	unsigned int n = 0;
+    unsigned int n = 0;
     GridEl* el = head;
 
     while (el != nullptr) {
         el = next(el);
         ++n;
     }
-	std::cout << "Total number of elements: " << n << "\n";
+    std::cout << "Total number of elements: " << n << "\n";
 }
 
 Grid::GridEl* Grid::next(Grid::GridEl* reference) {
@@ -314,6 +314,6 @@ void Grid::simulate(unsigned int nMax, int plotAfter, int sleep) {
     }
 
     std::cout << "\033[2J\033[1;1H";
-    std::cout << "------ Grid after " << nSim - 1 << " Iterations, with " << moves << " moves. -------------------\n";
+    std::cout << "------ Grid after " << nSim << " Iterations, with " << moves << " moves. -------------------\n";
     drawPlot();
 }
