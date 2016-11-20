@@ -5,6 +5,7 @@ Grid::Grid(double threshold, int seed) {
     happinessThreshold = threshold;
     allHappy = false;
     rng.setseed(seed);
+    nMoves = 0;
 }
 
 Grid::~Grid() {
@@ -287,6 +288,7 @@ void Grid::move() {
             reference = next(reference);
         }
     }
+    nMoves += moves;
 }
 
 void Grid::simulate(unsigned int nMax, int plotAfter, int sleep) {
@@ -295,7 +297,7 @@ void Grid::simulate(unsigned int nMax, int plotAfter, int sleep) {
 
         if (nSim % plotAfter == 0) {
             std::cout << "\033[2J\033[1;1H"; // clear the screen
-            std::cout << "------ Grid after " << nSim << " Iterations, with " << moves << " moves. -------------------\n";
+            std::cout << "---- Grid after " << nSim << " Iterations, with " << moves << " moves in this round and a total of " << nMoves << " moves. ---- \n";
         }
         updateHappiness();
         move();
@@ -314,6 +316,6 @@ void Grid::simulate(unsigned int nMax, int plotAfter, int sleep) {
     }
 
     std::cout << "\033[2J\033[1;1H";
-    std::cout << "------ Grid after " << nSim << " Iterations, with " << moves << " moves. -------------------\n";
+    std::cout << "---- Grid after " << nSim << " Iterations, with " << moves << " moves in this round and a total of " << nMoves << " moves. ----\n";
     drawPlot();
 }

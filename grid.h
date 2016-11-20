@@ -35,7 +35,7 @@ public:
 
 private:
     double happinessThreshold;
-    unsigned int n, gridSize, nRaces;
+    unsigned int n, gridSize, nRaces, nMoves;
     GridEl* head;
     bool allHappy;
     int moves;
