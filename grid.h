@@ -6,6 +6,7 @@
 #include "RNG.h"
 #include <iostream>
 #include <unistd.h>
+#include <sys/time.h>
 
 class Grid {
 public:
@@ -32,6 +33,7 @@ public:
     void move();
     void countElements();
     GridEl* next(GridEl* reference);
+    float timedifference_msec(struct timeval t0, struct timeval t1);
 
 private:
     double happinessThreshold;
@@ -44,5 +46,8 @@ private:
     double findRatio(GridEl* reference);
     std::vector<char> raceChars {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
                                  'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    // timing purposes only
+    float totalSleep;
+    struct timeval t0, t1;
 };
 #endif

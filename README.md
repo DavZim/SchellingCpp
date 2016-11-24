@@ -21,7 +21,7 @@ Usage Options:
 ```
 
 ## Example:
-`./schelling.out -g 60 -n 15 -d 1000 -s 101 -m 100000` results in a final grid of
+` ./schelling.out -n 5 -g 50 -m 100000 -pi 10 -d 100000` results in a final grid of
 
 ![Final Grid](https://github.com/DavZim/SchellingCpp/raw/master/grid.png)
 

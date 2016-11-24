@@ -6,9 +6,15 @@ Grid::Grid(double threshold, int seed) {
     allHappy = false;
     rng.setseed(seed);
     nMoves = 0;
+    totalSleep = 0;
+    
+    // for timing purposes    
+    gettimeofday(&t0, 0);
 }
 
 Grid::~Grid() {
+    gettimeofday(&t1, 0);
+    std::cout << "Computation time [in milliseconds]: " << timedifference_msec(t0, t1) - totalSleep << " plus a total waiting time of " <<  totalSleep << ".\n";
 }
 
 void Grid::initiate(unsigned int gridSize){
@@ -305,7 +311,8 @@ void Grid::simulate(unsigned int nMax, int plotAfter, int sleep) {
         // clears the screen
         if (nSim % plotAfter == 0) {
             drawPlot();
-            usleep(sleep);
+            totalSleep += (float) sleep/1000; // to milliseconds
+            usleep(sleep); // in microseconds
         }
         ++n;
         ++nSim;
@@ -318,4 +325,7 @@ void Grid::simulate(unsigned int nMax, int plotAfter, int sleep) {
     std::cout << "\033[2J\033[1;1H";
     std::cout << "---- Grid after " << nSim << " Iterations, with " << moves << " moves in this round and a total of " << nMoves << " moves. ----\n";
     drawPlot();
+}
+float Grid::timedifference_msec(struct timeval t0, struct timeval t1) {
+    return (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f;
 }
